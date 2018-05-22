@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="zcommon_dialog_title_def">默认标题提示</string>
+  	<string name="zcommon_dialog_order_def">默认订单</string>
+  	<string name="zcommon_dialog_msg_def">默认内容提示</string>
+    <string name="zcommon_dialog_ok_def">默认确定</string>
+    <string name="zcommon_dialog_cancel_def">默认取消</string>
+    <string name="zcommon_editText_hit_def">请输入</string>
+    
+    <string name="zcommon_dialog_title">提示</string>
+    <string name="zcommon_dialog_ok">确定</string>
+    <string name="zcommon_dialog_cancel">取消</string>
+    <string name="zcommon_dialog_order_hit">订单号：</string>
+</resources>

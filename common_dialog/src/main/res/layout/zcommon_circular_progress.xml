@@ -1,0 +1,14 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/zcommon_trans" >
+
+    <!-- 最后一行是粗细 -->
+    <com.zndroid.widgets.progress.CircularProgress
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true" 
+        app:borderWidth="6dp"/>
+
+</RelativeLayout>
