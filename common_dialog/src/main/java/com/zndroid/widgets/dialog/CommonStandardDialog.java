@@ -245,6 +245,10 @@ public class CommonStandardDialog extends CommonDialogBase {
 			txt_title.setText(ReflectResourceUtil.getStringId(getContext(),
 					"zcommon_dialog_title_def"));
 			txt_title.setVisibility(View.VISIBLE);
+
+			txt_msg.setText(ReflectResourceUtil.getStringId(getContext(),
+					"zcommon_dialog_msg_def"));
+			txt_msg.setVisibility(View.VISIBLE);
 		}
 
 		if (showTitle) {
