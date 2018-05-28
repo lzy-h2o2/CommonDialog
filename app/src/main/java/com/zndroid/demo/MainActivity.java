@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.zndroid.widgets.PositionEnum;
+import com.zndroid.widgets.dialog.CommonSheetDialog;
 import com.zndroid.widgets.dialog.CommonStandardDialog;
 
 public class MainActivity extends Activity {
@@ -126,8 +127,19 @@ public class MainActivity extends Activity {
     }
 
     public void button2(View view) {
-
-
+        CommonSheetDialog dialog = new CommonSheetDialog(this);
+        dialog.builder()
+                .setTitle("请选择性别")
+                .addSheetItem("男", CommonSheetDialog.SheetItemColor.BlUE)
+                .addSheetItem("女", CommonSheetDialog.SheetItemColor.BlUE)
+                .addSheetItem("人妖", CommonSheetDialog.SheetItemColor.RED)
+                .setSheetItemClickListener(new CommonSheetDialog.OnSheetItemClickListener() {
+                    @Override
+                    public void onClick(int which, CommonSheetDialog.SheetItem item) {
+                        showToast(which + " " + item.getName() + "onClicked");
+                    }
+                })
+                .show();
     }
 
     public void button3(View view) {

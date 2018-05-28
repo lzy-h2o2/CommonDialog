@@ -44,6 +44,9 @@ public class CommonSheetDialog {
 
 	private DisplayMetrics displayMetrics;
 	private int height, width;
+	private float defaultFontSize = 18f;
+
+	private OnSheetItemClickListener listener;
 
 	public CommonSheetDialog(Activity context) {
 		this.context = context;
@@ -84,7 +87,7 @@ public class CommonSheetDialog {
 				"ActionSheetDialogStyle"));
 		dialog.setContentView(view);
 		Window dialogWindow = dialog.getWindow();
-		dialogWindow.setGravity(Gravity.LEFT | Gravity.BOTTOM);
+		dialogWindow.setGravity(Gravity.CENTER | Gravity.BOTTOM);
 		WindowManager.LayoutParams lp = dialogWindow.getAttributes();
 		lp.x = 0;
 		lp.y = 0;
@@ -98,6 +101,14 @@ public class CommonSheetDialog {
 		txt_title.setVisibility(View.VISIBLE);
 		txt_title.setText(title);
 		return this;
+	}
+
+	public TextView getTitle() {
+		return txt_title;
+	}
+
+	public void setItemFontSize(float fontSize) {
+		this.defaultFontSize = fontSize;
 	}
 
 	public CommonSheetDialog setCancelable(boolean cancel) {
@@ -116,15 +127,13 @@ public class CommonSheetDialog {
 	 *            条目名称
 	 * @param color
 	 *            条目字体颜色，设置null则默认蓝色
-	 * @param listener
 	 * @return
 	 */
-	public CommonSheetDialog addSheetItem(String strItem, SheetItemColor color,
-                                          OnSheetItemClickListener listener) {
+	public CommonSheetDialog addSheetItem(String strItem, SheetItemColor color) {
 		if (sheetItemList == null) {
 			sheetItemList = new ArrayList<SheetItem>();
-		}
-		sheetItemList.add(new SheetItem(strItem, color, listener));
+		}		sheetItemList.add(new SheetItem(strItem, color));
+
 		return this;
 	}
 
@@ -146,16 +155,15 @@ public class CommonSheetDialog {
 		}
 
 		// 循环添加条目
-		for (int i = 1; i <= size; i++) {
+		for (int i = 0; i < size; i++) {
 			final int index = i;
-			SheetItem sheetItem = sheetItemList.get(i - 1);
+			final SheetItem sheetItem = sheetItemList.get(i);
 			String strItem = sheetItem.name;
 			SheetItemColor color = sheetItem.color;
-			final OnSheetItemClickListener listener = sheetItem.itemClickListener;
 
 			TextView textView = new TextView(context);
 			textView.setText(strItem);
-			textView.setTextSize(18);//TODO 优化点  写死不太好吧
+			textView.setTextSize(defaultFontSize);
 			textView.setGravity(Gravity.CENTER);
 
 			// 背景图片
@@ -171,7 +179,7 @@ public class CommonSheetDialog {
 				}
 			} else {
 				if (showTitle) {
-					if (i >= 1 && i < size) {
+					if (i >= 0 && i < size) {
 						textView.setBackgroundResource(ReflectResourceUtil
 								.getDrawableId(context,
 										"zcommon_dialog_sheet_middle_selector"));
@@ -181,7 +189,7 @@ public class CommonSheetDialog {
 										"zcommon_dialog_sheet_bottom_selector"));
 					}
 				} else {
-					if (i == 1) {
+					if (i == 0) {
 						textView.setBackgroundResource(ReflectResourceUtil
 								.getDrawableId(context,
 										"zcommon_dialog_sheet_top_selector"));
@@ -199,7 +207,7 @@ public class CommonSheetDialog {
 
 			// 字体颜色
 			if (color == null) {
-				textView.setTextColor(Color.parseColor(SheetItemColor.Blue
+				textView.setTextColor(Color.parseColor(SheetItemColor.BlUE
 						.getName()));
 			} else {
 				textView.setTextColor(Color.parseColor(color.getName()));
@@ -215,7 +223,7 @@ public class CommonSheetDialog {
 			textView.setOnClickListener(new ACommonOnClickListener() {
 				@Override
 				public void onNoDoubleClick(View v) {
-					listener.onClick(index);
+					listener.onClick(index, sheetItem);
 					dialog.dismiss();
 				}
 			});
@@ -229,25 +237,36 @@ public class CommonSheetDialog {
 		dialog.show();
 	}
 
+	public CommonSheetDialog setSheetItemClickListener(OnSheetItemClickListener listener) {
+		this.listener = listener;
+		return this;
+	}
+
 	public interface OnSheetItemClickListener {
-		void onClick(int which);
+		void onClick(int which, SheetItem item);
 	}
 
 	public class SheetItem {
 		String name;
-		OnSheetItemClickListener itemClickListener;
 		SheetItemColor color;
 
-		public SheetItem(String name, SheetItemColor color,
-				OnSheetItemClickListener itemClickListener) {
+		public SheetItem(String name, SheetItemColor color) {
 			this.name = name;
 			this.color = color;
-			this.itemClickListener = itemClickListener;
+		}
+
+		public String getName() {
+			return name;
 		}
 	}
 
 	public enum SheetItemColor {
-		Blue("#037BFF"), Red("#FD4A2E");
+		BlUE("#037BFF"),
+        RED("#FD4A2E"),
+        WHITE("#FFFFFF"),
+        BLACK("#000000"),
+        DKGRAY("#444444"),
+        GRAY("#888888");
 
 		private String name;
 
