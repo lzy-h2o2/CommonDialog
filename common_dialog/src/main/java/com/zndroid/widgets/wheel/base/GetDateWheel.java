@@ -35,7 +35,7 @@ public class GetDateWheel {
 	
 	private static String result;
 	
-	public GetDateWheel(Context context,String currentTime) {
+	public GetDateWheel(Context context, String currentTime) {
 		this.context = context;
 		if (currentTime == null) {
 			currentTime = getCurrentTime();
@@ -56,7 +56,7 @@ public class GetDateWheel {
 
 	private void initView() {
 		LayoutInflater inflater = LayoutInflater.from(context);
-		final View timePickerView = inflater.inflate(ReflectResourceUtil.getLayoutId(context, "timepicker"),
+		final View timePickerView = inflater.inflate(ReflectResourceUtil.getLayoutId(context, "zcommon_timepicker"),
 				null);
 		ScreenInfo screenInfo = new ScreenInfo((Activity) context);
 		wheelMain = new WheelMain(timePickerView, context);

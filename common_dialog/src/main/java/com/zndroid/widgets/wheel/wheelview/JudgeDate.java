@@ -7,10 +7,10 @@ public class JudgeDate {
 	/**
       * 判断是否是日期格式
       * @param str_input
-      * @param str_input
+      * @param rDateFormat
       * @return boolean
       */
-	public static  boolean isDate(String str_input,String rDateFormat){
+	public static  boolean isDate(String str_input, String rDateFormat){
 		if (!isNull(str_input)) {
 	         SimpleDateFormat formatter = new SimpleDateFormat(rDateFormat);
 	         formatter.setLenient(false);

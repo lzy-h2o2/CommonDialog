@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.zndroid.widgets.utils.ReflectResourceUtil;
 
-
 /**
  * @author luzhenyu
  * 
@@ -17,47 +16,39 @@ import com.zndroid.widgets.utils.ReflectResourceUtil;
  *         <i> 通过 new CommonCriProgressDialog(youActivity.this).builder()创建实例<dd>
  *         	   然后就可以按照一般的Dialog使用了</i>
  * */
-public class CommonCriProgressDialog extends Dialog{
+public class CommonCriProgressDialog extends Dialog {
 
-	private CommonCriProgressDialog myCirProgressDialog;
 	private Context context;
+	private Dialog dialog;
 
 	public CommonCriProgressDialog(Context context) {
 		super(context);
 		this.context = context;
 	}
-	
-	public CommonCriProgressDialog(Context context, int themId) {
-		super(context, themId);
-		this.context = context;
-	}
 
-	private CommonCriProgressDialog builder() {
-		myCirProgressDialog = new CommonCriProgressDialog(context, ReflectResourceUtil.getStyleId(
+	public CommonCriProgressDialog builder() {
+		dialog = new Dialog(context, ReflectResourceUtil.getStyleId(
 				context, "CustomProgressDialog"));
-
-		if (null == myCirProgressDialog)
-			return null;
 
 		View view = LayoutInflater.from(context)
 				.inflate(
 						ReflectResourceUtil.getLayoutId(context,
 								"zcommon_circular_progress"), null);
-		myCirProgressDialog.setContentView(view);
-		myCirProgressDialog.setCanceledOnTouchOutside(false);
 
-		return myCirProgressDialog;
+		dialog.setContentView(view);
+		dialog.setCanceledOnTouchOutside(false);
+		return this;
 	}
 
 	public void showCriProgress() {
-		if (null != myCirProgressDialog && !myCirProgressDialog.isShowing())
-			myCirProgressDialog.show();
+		if (null != dialog && !dialog.isShowing())
+			dialog.show();
 	}
 
 	public void closeCriProgress() {
-		if (null != myCirProgressDialog) {
-			myCirProgressDialog.dismiss();
-			myCirProgressDialog = null;
+		if (null != dialog) {
+			dialog.dismiss();
+			dialog = null;
 		}
 	}
 }

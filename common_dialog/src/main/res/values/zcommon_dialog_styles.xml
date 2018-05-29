@@ -34,11 +34,6 @@
         <item name="android:windowEnterAnimation">@anim/zcommon_dialog_sheet_fade_in</item>
         <item name="android:windowExitAnimation">@anim/zcommon_dialog_sheet_fade_out</item>
     </style>
-    
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-    </style>
 
     <style name="CustomDialog" parent="@android:style/Theme.Dialog"> 
     	<item name="android:windowFrame">@null</item> 

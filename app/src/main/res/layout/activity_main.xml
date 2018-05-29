@@ -67,20 +67,27 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:onClick="button3"
-                android:text="日期选择" />
+                android:text="进度条弹框" />
             <Button
                 android:id="@+id/button4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:onClick="button4"
-                android:text="城市选择" />
+                android:text="日期选择" />
             <Button
                 android:id="@+id/button5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:onClick="button5"
+                android:text="城市选择" />
+            <Button
+                android:id="@+id/button56"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:onClick="button6"
                 android:text="时间选择" />
         </LinearLayout>
 

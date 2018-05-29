@@ -8,8 +8,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.zndroid.widgets.PositionEnum;
+import com.zndroid.widgets.dialog.CommonCriProgressDialog;
 import com.zndroid.widgets.dialog.CommonSheetDialog;
 import com.zndroid.widgets.dialog.CommonStandardDialog;
+import com.zndroid.widgets.wheel.base.GetCityWheel;
+import com.zndroid.widgets.wheel.base.GetDateWheel;
+import com.zndroid.widgets.wheel.base.GetTimeWheel;
 
 public class MainActivity extends Activity {
 
@@ -127,8 +131,10 @@ public class MainActivity extends Activity {
     }
 
     public void button2(View view) {
+        //底部列表弹框
         CommonSheetDialog dialog = new CommonSheetDialog(this);
-        dialog.builder()
+        dialog
+                .builder()
                 .setTitle("请选择性别")
                 .addSheetItem("男", CommonSheetDialog.SheetItemColor.BlUE)
                 .addSheetItem("女", CommonSheetDialog.SheetItemColor.BlUE)
@@ -143,14 +149,92 @@ public class MainActivity extends Activity {
     }
 
     public void button3(View view) {
+        //七彩虹进度条
+        final CommonCriProgressDialog dialog = new CommonCriProgressDialog(this);
+        dialog
+                .builder()
+                .showCriProgress();
 
+        view.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showToast("OK i will close it...");
+                dialog.closeCriProgress();
+            }
+        }, 3000);
     }
 
     public void button4(View view) {
+        //日期选择弹框 - 可以借助自定义标准对话框作为展示载体
+        CommonStandardDialog dialog = new CommonStandardDialog(this);
 
+        final View dateWheel = new GetDateWheel(this, null).getTimeView();
+        dialog
+                .builder(PositionEnum.CENTER)
+                .setView(dateWheel)
+                .setTitle("Date Wheel")
+                .setPositiveButton("ok")
+                .setCommonClickListener(new CommonStandardDialog.CommonOnClickListener() {
+                    @Override
+                    public void onOK(View v) {
+                        showToast(GetDateWheel.getTimeResult());
+                    }
+
+                    @Override
+                    public void onCancel(View v) {
+
+                    }
+                })
+                .show();
     }
 
     public void button5(View view) {
+        //城市选择弹框 - 可以借助自定义标准对话框作为展示载体
+        CommonStandardDialog dialog = new CommonStandardDialog(this);
+
+        final View cityWheel = new GetCityWheel(this).getCityView();
+        dialog
+                .builder(PositionEnum.CENTER)
+                .setView(cityWheel)
+                .setTitle("City Wheel")
+                .setPositiveButton("ok")
+                .setCommonClickListener(new CommonStandardDialog.CommonOnClickListener() {
+                    @Override
+                    public void onOK(View v) {
+                        showToast(GetCityWheel.getResultStr());
+                    }
+
+                    @Override
+                    public void onCancel(View v) {
+
+                    }
+                })
+                .show();
+
+    }
+
+    public void button6(View view) {
+        //时间选择弹框 - 可以借助自定义标准对话框作为展示载体
+        CommonStandardDialog dialog = new CommonStandardDialog(this);
+
+        final View timeWheel = new GetTimeWheel(this, null).getTimeView();
+        dialog
+                .builder(PositionEnum.CENTER)
+                .setView(timeWheel)
+                .setTitle("Time Wheel")
+                .setPositiveButton("ok")
+                .setCommonClickListener(new CommonStandardDialog.CommonOnClickListener() {
+                    @Override
+                    public void onOK(View v) {
+                        showToast(GetTimeWheel.getTimeResult());
+                    }
+
+                    @Override
+                    public void onCancel(View v) {
+
+                    }
+                })
+                .show();
 
     }
 
